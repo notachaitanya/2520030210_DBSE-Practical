@@ -1,4 +1,4 @@
-
+DROP DATABASE IF EXISTS bookFlow2_db;
 
 CREATE DATABASE bookFlow2_db;
 
