@@ -1,0 +1,21 @@
+$kind: http-request
+url: "{{baseUrl}}/products"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "name": "Wireless Headphones",
+      "category": "Electronics",
+      "price": 1999
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test("Create product - status 201", function () { pm.response.to.have.status(201); });
+      var j = pm.response.json();
+      pm.collectionVariables.set("productId", j.id);
+    language: text/javascript
+order: 4000

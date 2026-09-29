@@ -1,0 +1,11 @@
+$kind: http-request
+url: "{{baseUrl}}/orders/{{orderId}}"
+method: GET
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test("Get order - status 200", function () { pm.response.to.have.status(200); });
+      var j = pm.response.json();
+      pm.test("Order is INVENTORY_RESERVED", function () { pm.expect(j.status).to.eql("INVENTORY_RESERVED"); });
+    language: text/javascript
+order: 10000

@@ -1,0 +1,11 @@
+$kind: http-request
+url: "{{baseUrl}}/activities"
+method: GET
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test("Activities - status 200", function () { pm.response.to.have.status(200); });
+      var j = pm.response.json();
+      pm.test("Contains ORDER_CREATED", function () { pm.expect(j.some(a => a.action === "ORDER_CREATED")).to.be.true; });
+    language: text/javascript
+order: 11000

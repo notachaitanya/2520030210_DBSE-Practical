@@ -1,0 +1,26 @@
+$kind: http-request
+url: "{{baseUrl}}/orders"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "userId": "{{userId}}",
+      "items": [
+        {
+          "productId": "{{productId}}",
+          "quantity": 2
+        },
+        {
+          "productId": "{{productId2}}",
+          "quantity": 5
+        }
+      ]
+    }
+scripts:
+  - type: afterResponse
+    code: pm.test("Saga order fails - status 409", function () { pm.response.to.have.status(409); });
+    language: text/javascript
+order: 16000

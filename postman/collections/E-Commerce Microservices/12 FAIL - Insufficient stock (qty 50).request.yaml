@@ -1,0 +1,22 @@
+$kind: http-request
+url: "{{baseUrl}}/orders"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "userId": "{{userId}}",
+      "items": [
+        {
+          "productId": "{{productId}}",
+          "quantity": 50
+        }
+      ]
+    }
+scripts:
+  - type: afterResponse
+    code: pm.test("Insufficient stock - status 409", function () { pm.response.to.have.status(409); });
+    language: text/javascript
+order: 12000

@@ -1,0 +1,16 @@
+$kind: collection
+description: ""
+variables:
+  email: ""
+  userId: ""
+  token: ""
+  productId: ""
+  productId2: ""
+  orderId: ""
+  baseUrl: http://localhost:8000
+auth:
+  - id: acde8913-ff4d-4a88-bbee-e83cda74052d
+    type: bearer
+    name: bearer auth
+    credentials:
+      token: "{{token}}"

@@ -1,0 +1,17 @@
+$kind: http-request
+url: "{{baseUrl}}/inventory"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "productId": "{{productId2}}",
+      "availableQuantity": 1
+    }
+scripts:
+  - type: afterResponse
+    code: pm.test("Add stock 2 - status 200", function () { pm.response.to.have.status(200); });
+    language: text/javascript
+order: 15000

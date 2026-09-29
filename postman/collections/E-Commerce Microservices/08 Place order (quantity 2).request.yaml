@@ -1,0 +1,26 @@
+$kind: http-request
+url: "{{baseUrl}}/orders"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "userId": "{{userId}}",
+      "items": [
+        {
+          "productId": "{{productId}}",
+          "quantity": 2
+        }
+      ]
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test("Place order - status 201", function () { pm.response.to.have.status(201); });
+      var j = pm.response.json();
+      pm.collectionVariables.set("orderId", j.orderId);
+      pm.test("Status is INVENTORY_RESERVED", function () { pm.expect(j.status).to.eql("INVENTORY_RESERVED"); });
+    language: text/javascript
+order: 8000

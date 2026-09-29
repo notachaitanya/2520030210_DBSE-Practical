@@ -1,0 +1,21 @@
+$kind: http-request
+url: "{{baseUrl}}/products"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "name": "Phone Case",
+      "category": "Accessories",
+      "price": 499
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test("Create product 2 - status 201", function () { pm.response.to.have.status(201); });
+      var j = pm.response.json();
+      pm.collectionVariables.set("productId2", j.id);
+    language: text/javascript
+order: 14000
