@@ -1,0 +1,15 @@
+   spring:
+     datasource:
+       url: jdbc:postgresql://localhost:5432/bookflow
+       username: postgres
+       password: "Iamchaitanya@13542"
+     jpa:
+       hibernate:
+         ddl-auto: update
+       show-sql: true
+       properties:
+         hibernate:
+           format_sql: true
+     jpa.open-in-view: false
+   server:
+     port: 8081
